@@ -367,3 +367,22 @@ footer {
         overflow-x: auto;
     }
 }
+
+/* Activity 7: Live booking summary card */
+#booking-summary {
+    margin-top: 20px;
+    padding: 18px;
+    border: 1px solid #e8ebf1;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(16, 26, 54, 0.05);
+}
+
+#booking-summary h2 {
+    margin-top: 0;
+}
+
+#booking-summary h3 {
+    padding-top: 10px;
+    border-top: 1px solid #e8ebf1;
+}

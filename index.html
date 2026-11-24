@@ -123,7 +123,7 @@
                     <td>₹800</td>
                     <td>₹1500</td>
                     <td>₹3000</td>
-                    <td><a href="booking.html#booking-form" class="book-btn">Book</a></td>
+                    <td><a href="booking.html?match=CSK%20vs%20MI#booking-form" class="book-btn" data-match="CSK vs MI">Book</a></td>
                 </tr>
 
                 <tr>
@@ -134,7 +134,7 @@
                     <td>₹900</td>
                     <td>₹1800</td>
                     <td>₹3500</td>
-                    <td><a href="booking.html#booking-form" class="book-btn">Book</a></td>
+                    <td><a href="booking.html?match=RCB%20vs%20KKR#booking-form" class="book-btn" data-match="RCB vs KKR">Book</a></td>
                 </tr>
 
                 <tr>
@@ -145,7 +145,7 @@
                     <td>₹700</td>
                     <td>₹1400</td>
                     <td>₹2800</td>
-                    <td><a href="booking.html#booking-form" class="book-btn">Book</a></td>
+                    <td><a href="booking.html?match=MI%20vs%20KKR#booking-form" class="book-btn" data-match="MI vs KKR">Book</a></td>
                 </tr>
 
                 <tr>
@@ -156,7 +156,7 @@
                     <td>₹750</td>
                     <td>₹1600</td>
                     <td>₹3200</td>
-                    <td><a href="booking.html#booking-form" class="book-btn">Book</a></td>
+                    <td><a href="booking.html?match=SRH%20vs%20CSK#booking-form" class="book-btn" data-match="SRH vs CSK">Book</a></td>
                 </tr>
 
             </tbody>
@@ -168,83 +168,13 @@
 
 
     <section id="booking">
-
         <h2>Book Your IPL Tickets</h2>
-
-        <form>
-
-            <label for="match">Select Match:</label>
-
-            <select id="match" name="match">
-
-                <option value="">Choose Match</option>
-                <option>CSK vs MI</option>
-                <option>RCB vs KKR</option>
-                <option>MI vs KKR</option>
-                <option>SRH vs CSK</option>
-
-            </select>
-
-            <br><br>
-
-            <label for="stand">Stand Category:</label>
-
-            <select id="stand" name="stand">
-
-                <option>General</option>
-                <option>Premium</option>
-                <option>VIP</option>
-
-            </select>
-
-            <br><br>
-
-            <label for="quantity">Number of Tickets:</label>
-
-            <input type="number" id="quantity" name="quantity" min="1" max="10">
-
-            <br><br>
-
-            <label for="name">Full Name:</label>
-
-            <input type="text" id="name" name="name" placeholder="Enter your name">
-
-            <br><br>
-
-            <label for="email">Email Address:</label>
-
-            <input type="email" id="email" name="email" placeholder="Enter your email">
-
-            <br><br>
-
-            <label for="phone">Phone Number:</label>
-
-            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
-
-            <br><br>
-
-            <button type="submit">Confirm Booking</button>
-
-        </form>
-
+        <p>Select a match from the schedule and click its Book link to continue to the booking page.</p>
+        <a href="booking.html#booking-form" class="book-btn">Go to Booking Form</a>
     </section>
 
 
-    <aside>
 
-        <h2>Booking Summary</h2>
-
-        <p>Match: Not Selected</p>
-
-        <p>Stand Category: Not Selected</p>
-
-        <p>Ticket Price: ₹0</p>
-
-        <p>Quantity: 0</p>
-
-        <h3>Total Amount: ₹0</h3>
-
-    </aside>
 
 
 
