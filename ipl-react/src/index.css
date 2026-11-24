@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6fa;
+    color: #222222;
+}
+
+/* Smooth transitions */
+button,
+a,
+.match-card {
+    transition: all 0.3s ease;
+}
+
+/* Button hover animation */
+button:hover {
+    transform: translateY(-3px);
+}
+
+/* Match card animation */
+.match-card {
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+.match-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Navbar link animation */
+.nav-links a {
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #f5b82e;
+}

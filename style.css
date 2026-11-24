@@ -272,7 +272,7 @@ aside {
     margin: 30px;
 
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(226, 62, 62, 0.15);
 }
 
 aside h2,
@@ -290,7 +290,7 @@ aside h3 {
     padding: 40px;
     margin: 30px;
     border-radius: 12px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 012px 3px #f70b1714;
 }
 
 

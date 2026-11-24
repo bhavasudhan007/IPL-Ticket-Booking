@@ -1,0 +1,178 @@
+.navbar {
+    background-color: #173675;
+    color: white;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    background: linear-gradient(120deg, #173675, #5176ca);
+    color: white;
+    text-align: center;
+    padding: 90px 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+}
+
+.hero p {
+    font-size: 18px;
+}
+
+.hero-btn {
+    display: inline-block;
+    background-color: #f5b82e;
+    color: #222;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.matches-section {
+    padding: 40px;
+    text-align: center;
+}
+
+.matches-section select {
+    padding: 10px;
+    margin: 20px;
+}
+
+.match-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.match-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.match-card h2 {
+    color: #173675;
+}
+
+.match-card button {
+    background-color: #5176ca;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.match-card button:hover {
+    background-color: #173675;
+}
+
+.about-section {
+    background-color: #e9eef8;
+    padding: 40px;
+    text-align: center;
+}
+
+footer {
+    background-color: #173675;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .match-container {
+        grid-template-columns: 1fr;
+    }
+
+    .matches-section {
+        padding: 20px;
+    }
+}
+
+/* Hero animation */
+.hero h1 {
+    animation: slideDown 0.8s ease;
+}
+
+.hero p {
+    animation: fadeIn 1.2s ease;
+}
+
+.hero-btn {
+    transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+    background-color: white;
+    color: #173675;
+    transform: scale(1.05);
+}
+
+/* Section heading animation */
+.matches-section h1 {
+    animation: fadeIn 0.8s ease;
+}
+
+/* Match card hover */
+.match-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* About section */
+.about-section {
+    scroll-margin-top: 20px;
+}
+
+/* Keyframes */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
