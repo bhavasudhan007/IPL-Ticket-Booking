@@ -1,52 +1,21 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import MatchCard from "./components/MatchCard";
 
-function App() {
+import BookingPage from "./pages/BookingPage";
+import ConfirmationPage from "./pages/ConfirmationPage";
 
-  const matches = [
-    {
-      id: 1,
-      team1: "CSK",
-      team2: "MI",
-      date: "10 April 2026",
-      time: "7:30 PM",
-      venue: "Chennai",
-      price: 800
-    },
-    {
-      id: 2,
-      team1: "RCB",
-      team2: "KKR",
-      date: "12 April 2026",
-      time: "7:30 PM",
-      venue: "Bengaluru",
-      price: 900
-    },
-    {
-      id: 3,
-      team1: "MI",
-      team2: "KKR",
-      date: "15 April 2026",
-      time: "3:30 PM",
-      venue: "Mumbai",
-      price: 700
-    },
-    {
-      id: 4,
-      team1: "SRH",
-      team2: "CSK",
-      date: "18 April 2026",
-      time: "7:30 PM",
-      venue: "Hyderabad",
-      price: 750
-    }
-  ];
+import { supabase } from "./supabase";
 
-  const [selectedTeam, setSelectedTeam] = useState("All");
-
+function Home({ matches, loading, error, selectedTeam, setSelectedTeam }) {
   const filteredMatches = matches.filter((match) => {
     return (
       selectedTeam === "All" ||
@@ -56,14 +25,11 @@ function App() {
   });
 
   return (
-    <div>
-
+    <>
       <Navbar />
-
       <Hero />
 
       <section className="matches-section" id="matches">
-
         <h1>Upcoming IPL Matches</h1>
 
         <select
@@ -75,29 +41,30 @@ function App() {
           <option value="MI">MI</option>
           <option value="RCB">RCB</option>
           <option value="KKR">KKR</option>
+          <option value="GT">GT</option>
+          <option value="RR">RR</option>
           <option value="SRH">SRH</option>
+          <option value="DC">DC</option>
+          <option value="LSG">LSG</option>
+          <option value="PBKS">PBKS</option>
         </select>
 
         <div className="match-container">
+          {loading && <p>Loading matches...</p>}
 
-          {filteredMatches.map((match) => (
+          {error && <p>Error loading matches: {error}</p>}
+
+          {!loading && !error && filteredMatches.map((match) => (
             <MatchCard
               key={match.id}
-              team1={match.team1}
-              team2={match.team2}
-              date={match.date}
-              time={match.time}
-              venue={match.venue}
-              price={match.price}
+              {...match}
             />
           ))}
 
+          {!loading && !error && filteredMatches.length === 0 && (
+            <p>No matches found.</p>
+          )}
         </div>
-
-        {filteredMatches.length === 0 && (
-          <p>No matches found.</p>
-        )}
-
       </section>
 
       <section className="about-section" id="about">
@@ -111,8 +78,133 @@ function App() {
       <footer>
         <p>© 2026 IPL Ticket Booking. All Rights Reserved.</p>
       </footer>
+    </>
+  );
+}
 
-    </div>
+function App() {
+  const [matches, setMatches] = useState([]);
+  const [selectedTeam, setSelectedTeam] = useState("All");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  async function fetchMatches() {
+    const { data, error } = await supabase
+      .from("matches")
+      .select("*")
+      .order("id");
+
+    if (error) {
+      console.error(error.message);
+      setError(error.message);
+    } else {
+      setMatches(data);
+      setError("");
+    }
+
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    fetchMatches();
+  }, []);
+
+  async function handleBooking(match, userName, tickets) {
+    if (!userName.trim()) {
+      alert("Please enter your name.");
+      return false;
+    }
+
+    if (!Number.isInteger(tickets) || tickets < 1) {
+      alert("Please enter a valid number of tickets.");
+      return false;
+    }
+
+    if (tickets > match.available_seats) {
+      alert("Not enough seats available!");
+      return false;
+    }
+
+    const totalPrice = match.price * tickets;
+
+    const { data: updatedMatch, error: updateError } = await supabase
+      .from("matches")
+      .update({
+        available_seats: match.available_seats - tickets
+      })
+      .eq("id", match.id)
+      .gte("available_seats", tickets)
+      .select()
+      .maybeSingle();
+
+    if (updateError) {
+      alert("Error updating seats: " + updateError.message);
+      return false;
+    }
+
+    if (!updatedMatch) {
+      alert("Booking failed. Seats may have changed. Please try again.");
+      await fetchMatches();
+      return false;
+    }
+
+    const { error: bookingError } = await supabase
+      .from("bookings")
+      .insert([
+        {
+          match_id: match.id,
+          user_name: userName.trim(),
+          match_title: match.team1 + " vs " + match.team2,
+          tickets: tickets,
+          total_price: totalPrice
+        }
+      ]);
+
+    if (bookingError) {
+      await supabase
+        .from("matches")
+        .update({
+          available_seats: updatedMatch.available_seats + tickets
+        })
+        .eq("id", match.id);
+
+      alert("Booking failed: " + bookingError.message);
+      await fetchMatches();
+      return false;
+    }
+
+    await fetchMatches();
+
+    return true;
+  }
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              matches={matches}
+              loading={loading}
+              error={error}
+              selectedTeam={selectedTeam}
+              setSelectedTeam={setSelectedTeam}
+            />
+          }
+        />
+
+        <Route
+          path="/booking"
+          element={<BookingPage onBook={handleBooking} />}
+        />
+
+        <Route
+          path="/confirmation"
+          element={<ConfirmationPage />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

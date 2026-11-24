@@ -176,3 +176,90 @@ footer {
         opacity: 1;
     }
 }
+
+.match-card form {
+    margin-top: 15px;
+}
+
+.match-card input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.match-card form label {
+    display: block;
+    margin-top: 10px;
+}
+
+.match-card hr {
+    margin: 15px 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+.match-card form p {
+    margin: 15px 0;
+}
+
+.booking-page {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: #f4f6fa;
+}
+
+.booking-card {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.booking-card h1,
+.booking-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.booking-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.booking-card input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.booking-card button,
+.booking-page button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #173675;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.booking-card button:hover,
+.booking-page button:hover {
+    background: #5176ca;
+}
+
+.booking-card .back-button {
+    background: #666;
+    width: 100%;
+}
