@@ -386,3 +386,364 @@ footer {
     padding-top: 10px;
     border-top: 1px solid #e8ebf1;
 }
+
+/* ==========================================
+   ACTIVITY 8 - RESPONSIVE WEBSITE
+   FLEXBOX, CSS GRID AND MEDIA QUERIES
+========================================== */
+
+
+/* ==========================================
+   1. RESPONSIVE NAVIGATION USING FLEXBOX
+========================================== */
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 15px 40px;
+    gap: 20px;
+}
+
+.site-header .logo {
+    color: var(--accent);
+    margin: 0;
+    font-size: 25px;
+    white-space: nowrap;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 25px;
+    margin: 0;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.main-nav a:hover {
+    color: var(--accent);
+}
+
+
+/* HAMBURGER BUTTON */
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   2. MATCH CARDS USING CSS GRID
+========================================== */
+
+.match-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.match-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    background-color: white;
+    padding: 25px;
+
+    border-radius: 12px;
+    border: 1px solid #ddd;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    transition: transform 0.3s;
+}
+
+.match-card:hover {
+    transform: translateY(-5px);
+}
+
+.match-card h3 {
+    font-size: 23px;
+    margin: 0;
+    color: var(--primary);
+}
+
+.match-card p {
+    margin: 3px 0;
+}
+
+.ticket-prices {
+    width: 100%;
+    background-color: #f4f6fa;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.ticket-prices p {
+    margin: 5px 0;
+}
+
+.book-btn {
+    display: inline-block;
+    background-color: var(--accent);
+    color: var(--primary);
+
+    padding: 10px 20px;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    border-radius: 6px;
+    margin-top: auto;
+}
+
+.book-btn:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+
+/* ==========================================
+   3. GRID AND LIST VIEW BUTTONS
+========================================== */
+
+.view-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.view-btn {
+    background-color: white;
+    color: var(--primary);
+
+    border: 1px solid var(--primary);
+    padding: 10px 18px;
+
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.view-btn.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.view-btn:hover {
+    background-color: var(--accent);
+    color: var(--primary);
+}
+
+
+/* ==========================================
+   4. LIST VIEW DESIGN
+========================================== */
+
+.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.list-view .match-card {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.list-view .ticket-prices {
+    width: auto;
+}
+
+
+/* ==========================================
+   5. GUIDELINES USING CSS GRID
+========================================== */
+
+.guidelines-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.guidelines-grid article {
+    background-color: white;
+    padding: 20px;
+    margin: 0;
+
+    border-left: 5px solid var(--accent);
+    border-radius: 8px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ==========================================
+   6. TABLET RESPONSIVE DESIGN
+========================================== */
+
+@media screen and (max-width: 900px) {
+
+    .match-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .guidelines-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .site-header {
+        padding: 15px 20px;
+    }
+
+    .main-nav {
+        gap: 12px;
+    }
+
+}
+
+
+/* ==========================================
+   7. MOBILE RESPONSIVE DESIGN
+========================================== */
+
+@media screen and (max-width: 600px) {
+
+    body {
+        padding-top: 70px;
+    }
+
+    /* Navigation */
+
+    .site-header {
+        flex-direction: row;
+        padding: 12px 18px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .main-nav {
+        display: none;
+
+        position: absolute;
+        top: 100%;
+        left: 0;
+
+        width: 100%;
+
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 0;
+        padding: 10px 20px;
+
+        background-color: var(--primary);
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .main-nav a {
+        width: 100%;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+
+    /* Hero section */
+
+    #home {
+        padding: 60px 15px;
+    }
+
+    #home h1 {
+        font-size: 28px;
+    }
+
+    #home p {
+        font-size: 16px;
+    }
+
+
+    /* Content sections */
+
+    #about,
+    #matches,
+    #booking,
+    #mybookings,
+    #guidelines {
+        margin: 12px;
+        padding: 20px;
+    }
+
+
+    /* Match cards */
+
+    .match-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .match-card {
+        padding: 18px;
+    }
+
+
+    /* List view */
+
+    .list-view .match-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-view .ticket-prices {
+        width: 100%;
+    }
+
+
+    /* Guidelines */
+
+    .guidelines-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* View buttons */
+
+    .view-controls {
+        justify-content: center;
+    }
+
+    .view-btn {
+        flex: 1;
+    }
+
+
+    /* Booking summary */
+
+    #booking-summary {
+        width: 100%;
+        padding: 15px;
+    }
+
+}

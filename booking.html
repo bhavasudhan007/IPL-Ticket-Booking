@@ -25,32 +25,25 @@
         <form id="booking-form" action="#" method="post">
 
             <label for="name">Full Name:</label><br>
-            <input type="text" id="name" name="name"
-                   placeholder="Enter your full name" required>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
             <br><br>
 
             <label for="email">Email Address:</label><br>
-            <input type="email" id="email" name="email"
-                   placeholder="Enter your email" required>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
             <br><br>
 
             <label for="mobile">Mobile Number:</label><br>
-            <input type="tel" id="mobile" name="mobile"
-                   pattern="[0-9]{10}"
-                   placeholder="Enter 10-digit mobile number" required>
+            <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number"
+                required>
             <br><br>
 
             <label for="match">Select Match:</label><br>
             <select id="match" name="match" required>
                 <option value="">-- Select a Match --</option>
-                <option value="CSK vs MI"
-                        data-general="800" data-premium="1500" data-vip="3000">CSK vs MI</option>
-                <option value="RCB vs KKR"
-                        data-general="900" data-premium="1800" data-vip="3500">RCB vs KKR</option>
-                <option value="MI vs KKR"
-                        data-general="700" data-premium="1400" data-vip="2800">MI vs KKR</option>
-                <option value="SRH vs CSK"
-                        data-general="750" data-premium="1600" data-vip="3200">SRH vs CSK</option>
+                <option value="CSK vs MI" data-general="800" data-premium="1500" data-vip="3000">CSK vs MI</option>
+                <option value="RCB vs KKR" data-general="900" data-premium="1800" data-vip="3500">RCB vs KKR</option>
+                <option value="MI vs KKR" data-general="700" data-premium="1400" data-vip="2800">MI vs KKR</option>
+                <option value="SRH vs CSK" data-general="750" data-premium="1600" data-vip="3200">SRH vs CSK</option>
             </select>
             <br><br>
 
@@ -64,8 +57,7 @@
             <br><br>
 
             <label for="tickets">Number of Tickets:</label><br>
-            <input type="number" id="tickets" name="tickets"
-                   min="1" max="10" value="1" required>
+            <input type="number" id="tickets" name="tickets" min="1" max="10" value="1" required>
             <br><br>
 
             <label for="date">Booking Date:</label><br>

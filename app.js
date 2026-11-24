@@ -1,80 +1,202 @@
-// =====================================
-// 1. REUSABLE TOAST NOTIFICATION
-// =====================================
 
-function showToast(message) {
-    // Remove an older toast if one is still visible.
-    const oldToast = document.getElementById("toast-message");
-    if (oldToast) {
-        oldToast.remove();
-    }
-
-    const toast = document.createElement("div");
-    toast.id = "toast-message";
-    toast.innerText = message;
-
-    toast.style.position = "fixed";
-    toast.style.bottom = "20px";
-    toast.style.right = "20px";
-    toast.style.backgroundColor = "#222";
-    toast.style.color = "white";
-    toast.style.padding = "15px 25px";
-    toast.style.borderRadius = "8px";
-    toast.style.zIndex = "1000";
-    toast.style.fontSize = "16px";
-
-    document.body.appendChild(toast);
-
-    setTimeout(function () {
-        toast.remove();
-    }, 3000);
-}
-
-
-// =====================================
-// 2. BOOK BUTTON AND SMOOTH SCROLLING
-// =====================================
+// ============================================
+// IPL WEBSITE - JAVASCRIPT
+// Activities 5, 7 and 8
+// ============================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // On the main page, pass the selected match to booking.html.
-    const bookButtons = document.querySelectorAll(".book-btn");
+    // =====================================
+    // 1. REUSABLE TOAST NOTIFICATION
+    // =====================================
 
-    bookButtons.forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            const selectedMatch = button.dataset.match;
+    window.showToast = function (message) {
 
-            // Schedule table buttons have data-match.
-            // Navigate to booking.html instead of scrolling to the form on index.html.
-            if (selectedMatch) {
-                event.preventDefault();
+        let oldToast = document.getElementById("toast-message");
 
-                const bookingUrl =
-                    "booking.html?match=" +
-                    encodeURIComponent(selectedMatch) +
-                    "#booking-form";
+        if (oldToast) {
+            oldToast.remove();
+        }
 
-                window.location.href = bookingUrl;
-            }
+        let toast = document.createElement("div");
+
+        toast.id = "toast-message";
+        toast.innerText = message;
+
+        toast.style.position = "fixed";
+        toast.style.bottom = "20px";
+        toast.style.right = "20px";
+        toast.style.backgroundColor = "#222";
+        toast.style.color = "white";
+        toast.style.padding = "15px 25px";
+        toast.style.borderRadius = "8px";
+        toast.style.zIndex = "2000";
+
+        document.body.appendChild(toast);
+
+        setTimeout(function () {
+            toast.remove();
+        }, 3000);
+
+    };
+
+
+    // =====================================
+    // 2. ACTIVITY 8 - HAMBURGER MENU
+    // =====================================
+
+    let menuToggle = document.getElementById("menuToggle");
+
+    let mainNav = document.getElementById("mainNav");
+
+    if (menuToggle && mainNav) {
+
+        menuToggle.addEventListener("click", function () {
+
+            mainNav.classList.toggle("active");
+
+            let isOpen = mainNav.classList.contains("active");
+
+            menuToggle.innerText = isOpen ? "✕" : "☰";
+
+            menuToggle.setAttribute("aria-expanded", isOpen);
+
         });
-    });
+
+
+        // Close menu after clicking a navigation link
+
+        let navLinks = mainNav.querySelectorAll("a");
+
+        navLinks.forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                mainNav.classList.remove("active");
+
+                menuToggle.innerText = "☰";
+
+                menuToggle.setAttribute("aria-expanded", "false");
+
+            });
+
+        });
+
+    }
 
 
     // =====================================
-    // 3. ACTIVITY 7: LIVE BOOKING SUMMARY
+    // 3. ACTIVITY 8 - FILTER MATCHES BY TEAM
     // =====================================
 
-    const matchSelect = document.getElementById("match");
-    const categorySelect = document.getElementById("category");
-    const ticketQuantity = document.getElementById("tickets");
+    let teamFilter = document.getElementById("teamFilter");
 
-    const summaryMatch = document.getElementById("summary-match");
-    const summaryCategory = document.getElementById("summary-category");
-    const summaryPrice = document.getElementById("summary-price");
-    const summaryQuantity = document.getElementById("summary-quantity");
-    const summaryTotal = document.getElementById("summary-total");
+    let matchCards = document.querySelectorAll(".match-card");
 
-    // These controls exist only on booking.html.
+    if (teamFilter) {
+
+        teamFilter.addEventListener("change", function () {
+
+            let selectedTeam = teamFilter.value;
+
+            matchCards.forEach(function (card) {
+
+                let teams = card.dataset.teams.split(" ");
+
+                if (selectedTeam === "all" || teams.includes(selectedTeam)) {
+
+                    card.style.display = "";
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+            showToast("Match filter updated!");
+
+        });
+
+    }
+
+
+    // =====================================
+    // 4. ACTIVITY 8 - GRID AND LIST VIEW
+    // =====================================
+
+    let matchContainer = document.getElementById("matchContainer");
+
+    let gridViewBtn = document.getElementById("gridViewBtn");
+
+    let listViewBtn = document.getElementById("listViewBtn");
+
+
+    // GRID VIEW
+
+    if (gridViewBtn && matchContainer) {
+
+        gridViewBtn.addEventListener("click", function () {
+
+            matchContainer.classList.remove("list-view");
+
+            matchContainer.classList.add("match-grid");
+
+            gridViewBtn.classList.add("active");
+
+            listViewBtn.classList.remove("active");
+
+            showToast("Grid View Enabled!");
+
+        });
+
+    }
+
+
+    // LIST VIEW
+
+    if (listViewBtn && matchContainer) {
+
+        listViewBtn.addEventListener("click", function () {
+
+            matchContainer.classList.remove("match-grid");
+
+            matchContainer.classList.add("list-view");
+
+            listViewBtn.classList.add("active");
+
+            gridViewBtn.classList.remove("active");
+
+            showToast("List View Enabled!");
+
+        });
+
+    }
+
+
+    // =====================================
+    // 5. ACTIVITY 7 - BOOKING SUMMARY
+    // =====================================
+
+    let matchSelect = document.getElementById("match");
+
+    let categorySelect = document.getElementById("category");
+
+    let ticketQuantity = document.getElementById("tickets");
+
+
+    let summaryMatch = document.getElementById("summary-match");
+
+    let summaryCategory = document.getElementById("summary-category");
+
+    let summaryPrice = document.getElementById("summary-price");
+
+    let summaryQuantity = document.getElementById("summary-quantity");
+
+    let summaryTotal = document.getElementById("summary-total");
+
+
     if (
         matchSelect &&
         categorySelect &&
@@ -85,87 +207,132 @@ document.addEventListener("DOMContentLoaded", function () {
         summaryQuantity &&
         summaryTotal
     ) {
-        function updateBookingSummary(showNotification = true) {
-            const matchOption = matchSelect.options[matchSelect.selectedIndex];
-            const matchName = matchSelect.value;
-            const category = categorySelect.value;
-            const quantity = Number(ticketQuantity.value);
 
-            const priceKey = category ? category.toLowerCase() : "";
-            const price = matchOption && priceKey
+        function updateBookingSummary(showNotification = true) {
+
+            let matchOption = matchSelect.options[matchSelect.selectedIndex];
+
+            let matchName = matchSelect.value;
+
+            let category = categorySelect.value;
+
+            let quantity = Number(ticketQuantity.value);
+
+            let priceKey = category.toLowerCase();
+
+            let price = matchOption
                 ? Number(matchOption.dataset[priceKey] || 0)
                 : 0;
 
-            // Keep the summary safe and accurate for empty/invalid inputs.
+
             if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10) {
-                summaryQuantity.innerText = ticketQuantity.value || "0";
+
                 summaryTotal.innerText = "0";
-                summaryPrice.innerText = price.toLocaleString("en-IN");
+
                 if (showNotification) {
-                    showToast("Please select between 1 and 10 tickets.");
+                    showToast("Please select between 1 and 10 tickets!");
                 }
+
                 return;
+
             }
 
-            const total = price * quantity;
+
+            let totalPrice = price * quantity;
+
 
             summaryMatch.innerText = matchName || "Not Selected";
+
             summaryCategory.innerText = category || "Not Selected";
+
             summaryPrice.innerText = price.toLocaleString("en-IN");
+
             summaryQuantity.innerText = quantity;
-            summaryTotal.innerText = total.toLocaleString("en-IN");
+
+            summaryTotal.innerText = totalPrice.toLocaleString("en-IN");
+
 
             if (showNotification) {
                 showToast("Booking Summary Updated!");
             }
+
         }
 
-        // If the user clicked Book beside a match, select that match here.
-        const params = new URLSearchParams(window.location.search);
-        const matchFromSchedule = params.get("match");
+
+        // Get match selected from main page
+
+        let params = new URLSearchParams(window.location.search);
+
+        let matchFromSchedule = params.get("match");
+
 
         if (matchFromSchedule) {
-            const matchingOption = Array.from(matchSelect.options).find(
+
+            let matchingOption = Array.from(matchSelect.options).find(
                 option => option.value === matchFromSchedule
             );
 
             if (matchingOption) {
                 matchSelect.value = matchFromSchedule;
             }
+
         }
 
-        // Display initial values without showing a toast on page load.
+
+        // Display initial summary
+
         updateBookingSummary(false);
 
-        // Update live whenever the user changes a selector or quantity.
+
+        // Add event listeners
+
         matchSelect.addEventListener("change", function () {
-            updateBookingSummary(true);
+            updateBookingSummary();
         });
 
         categorySelect.addEventListener("change", function () {
-            updateBookingSummary(true);
+            updateBookingSummary();
         });
 
         ticketQuantity.addEventListener("input", function () {
-            updateBookingSummary(true);
+            updateBookingSummary();
         });
 
-        // Smoothly scroll to the form when arriving from the schedule.
+
+        // Reset summary
+
+        let bookingForm = document.getElementById("booking-form");
+
+        if (bookingForm) {
+
+            bookingForm.addEventListener("reset", function () {
+
+                setTimeout(function () {
+                    updateBookingSummary(false);
+                }, 0);
+
+            });
+
+        }
+
+
+        // Smooth scrolling when opening booking page
+
         if (window.location.hash === "#booking-form") {
+
             setTimeout(function () {
-                document.getElementById("booking-form").scrollIntoView({
+
+                bookingForm.scrollIntoView({
                     behavior: "smooth",
                     block: "start"
                 });
-                showToast("Match selected. Complete your booking!");
+
+                showToast("Complete your IPL booking!");
+
             }, 200);
+
         }
 
-        // Keep the summary in sync after the user resets the form.
-        document.getElementById("booking-form").addEventListener("reset", function () {
-            setTimeout(function () {
-                updateBookingSummary(false);
-            }, 0);
-        });
     }
+
 });
